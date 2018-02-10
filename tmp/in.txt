@@ -1,0 +1,37 @@
+One purpose of a proof is to establish the truth of an assertion with absolute cer- tainty, and mechanically checkable proofs of enormous length or complexity can accomplish this. But humanly intelligible proofs are the only ones that help some- one understand the subject. Mathematicians generally agree that important mathe- matical results can’t be fully understood until their proofs are understood. That is why proofs are an important part of the curriculum.
+To be understandable and helpful, more is required of a proof than just logical correctness: a good proof must also be clear. Correctness and clarity usually go together; a well-written proof is more likely to be a correct proof, since mistakes are harder to hide.
+In practice, the notion of proof is a moving target. Proofs in a professional research journal are generally unintelligible to all but a few experts who know all the terminology and prior results used in the proof. Conversely, proofs in the first weeks of a beginning course like 6.042 would be regarded as tediously long-winded by a professional mathematician. In fact, what we accept as a good proof later in the term will be different from what we consider good proofs in the first couple of weeks of 6.042. But even so, we can offer some general tips on writing good proofs:
+State your game plan. A good proof begins by explaining the general line of rea- soning, for example, “We use case analysis” or “We argue by contradiction.”
+p
+tional if it is equal to a ratio of integers—for example, 3:5 D 7=2 and 0:1111       D
+17
+We’ll prove by contradiction that 1=9 are rational numbers.
+2 is irrational. Remember that a number is ra-
+Theorem 1.8.1.
+nal. Then we can write
+Squaring both sides gives 2 D n2=d2 and so 2d2 D n2. This implies that n is a
+p
+p
+2 is ratio-
+p
+2 as a fraction n=d in lowest terms.
+
+“mcs” — 2017/6/5 — 19:42 — page 18 — #26
+18 Chapter 1 What is a Proof?
+Keepalinearflow. Sometimesproofsarewrittenlikemathematicalmosaics,with juicy tidbits of independent reasoning sprinkled throughout. This is not good. The steps of an argument should follow one another in an intelligible order.
+Aproofisanessay,notacalculation. Manystudentsinitiallywriteproofstheway they compute integrals. The result is a long sequence of expressions without explanation, making it very hard to follow. This is bad. A good proof usually looks like an essay with some equations thrown in. Use complete sentences.
+Avoidexcessivesymbolism. Yourreaderisprobablygoodatunderstandingwords, but much less skilled at reading arcane mathematical symbols. Use words where you reasonably can.
+Revise and simplify. Your readers will be grateful.
+Introduce notation thoughtfully. Sometimes an argument can be greatly simpli- fied by introducing a variable, devising a special notation, or defining a new term. But do this sparingly, since you’re requiring the reader to remember all that new stuff. And remember to actually define the meanings of new variables, terms, or notations; don’t just start using them!
+Structurelongproofs. Longprogramsareusuallybrokenintoahierarchyofsmaller procedures. Long proofs are much the same. When your proof needed facts that are easily stated, but not readily proved, those fact are best pulled out as preliminary lemmas. Also, if you are repeating essentially the same argu- ment over and over, try to capture that argument in a general lemma, which you can cite repeatedly instead.
+Be wary of the “obvious.” When familiar or truly obvious facts are needed in a proof, it’s OK to label them as such and to not prove them. But remember that what’s obvious to you may not be—and typically is not—obvious to your reader.
+Most especially, don’t use phrases like “clearly” or “obviously” in an attempt to bully the reader into accepting something you’re having trouble proving. Also, go on the alert whenever you see one of these phrases in someone else’s proof.
+Finish. At some point in a proof, you’ll have established all the essential facts you need. Resist the temptation to quit and leave the reader to draw the “obvious” conclusion. Instead, tie everything together yourself and explain why the original claim follows.
+
+“mcs” — 2017/6/5 — 19:42 — page 19 — #27
+1.10. References 19
+Creating a good proof is a lot like creating a beautiful work of art. In fact, mathematicians often refer to really good proofs as being “elegant” or “beautiful.” It takes a practice and experience to write proofs that merit such praises, but to get you started in the right direction, we will provide templates for the most useful proof techniques.
+Throughout the text there are also examples of bogus proofs—arguments that look like proofs but aren’t. Sometimes a bogus proof can reach false conclusions because of missteps or mistaken assumptions. More subtle bogus proofs reach correct conclusions, but do so in improper ways such as circular reasoning, leaping to unjustified conclusions, or saying that the hard part of the proof is “left to the reader.” Learning to spot the flaws in improper proofs will hone your skills at seeing how each proof step follows logically from prior steps. It will also enable you to spot flaws in your own proofs.
+The analogy between good proofs and good programs extends beyond structure. The same rigorous thinking needed for proofs is essential in the design of criti- cal computer systems. When algorithms and protocols only “mostly work” due to reliance on hand-waving arguments, the results can range from problematic to catastrophic. An early example was the Therac 25, a machine that provided radia- tion therapy to cancer victims, but occasionally killed them with massive overdoses due to a software race condition. A further example of a dozen years ago (August 2004) involved a single faulty command to a computer system used by United and American Airlines that grounded the entire fleet of both companies—and all their passengers!
+It is a certainty that we’ll all one day be at the mercy of critical computer systems designed by you and your classmates. So we really hope that you’ll develop the ability to formulate rock-solid logical arguments that a system actually does what you think it should do!
+
