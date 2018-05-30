@@ -10,7 +10,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="807.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="496.0" prefWidth="804.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -22,7 +22,7 @@
          <children>
             <HBox layoutX="-70.0" layoutY="-26.0" prefHeight="486.0" prefWidth="719.0">
                <children>
-                  <TableView fx:id="tblCatalog" onMouseDragEntered="#initialize" prefHeight="469.0" prefWidth="386.0">
+                  <TableView fx:id="tblCatalog" onMouseDragEntered="#initialize" prefHeight="492.0" prefWidth="380.0">
                     <columns>
                       <TableColumn fx:id="tbcId" onEditCommit="#changeIdCellEvent" prefWidth="33.0" text="N" />
                       <TableColumn fx:id="tbcTitle" onEditCommit="#changeTitleCellEvent" prefWidth="121.0" text="Title" />
@@ -52,11 +52,11 @@
                               <Font size="14.0" />
                            </font></Label>
                         <TextField fx:id="textFieldYear" onAction="#onChange" prefHeight="38.0" prefWidth="225.0" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="SearchByAuthor" />
                         <Button fx:id="btnOpen" mnemonicParsing="false" onAction="#OnClickOpen" prefHeight="33.0" prefWidth="114.0" text="Open" />
-                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="116.0" text="Add" />
+                        <Button fx:id="btnFilter" mnemonicParsing="false" onAction="#onClickSelect" prefHeight="32.0" prefWidth="116.0" text="Filter" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" text="New" />
-                        <Button mnemonicParsing="false" text="Save" />
+                        <Button fx:id="searchByParam" mnemonicParsing="false" onAction="#searchByParam" prefHeight="25.0" prefWidth="111.0" text="SearchByParam" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Save" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

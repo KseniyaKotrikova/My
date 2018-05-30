@@ -2,6 +2,7 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -11,20 +12,24 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
 
 import static javafx.scene.control.cell.TextFieldTableCell.*;
 
 public class Controller {
 
-    private ObservableList<Book>bookDate= FXCollections.observableArrayList(new Book(1,"War and Peace","Tolstoy",1868),new Book(2,"Anna Karenina","Tolstoy",1870),new Book(3,"Childhood","Tolstoy",1886), new Book(4,"Dead Souls","Gogol",1877));
+    private ObservableList<Book>bookDate= FXCollections.observableArrayList();
+    private FilteredList<Book> filteredList;
 
-    @FXML
-    private TextField textFieldN;
-
-    @FXML
-    private TextField textFieldTitle;
 
     @FXML
     private Button btnAdd;
@@ -32,10 +37,22 @@ public class Controller {
     private  Button btnOpen;
 
     @FXML
+    private Button searchByParam;
+
+    @FXML
+    private Button btnFilter;
+
+    @FXML
     private TextField textFieldAuthor;
 
     @FXML
     private TextField textFieldYear;
+
+    @FXML
+    private TextField textFieldN;
+
+    @FXML
+    private TextField textFieldTitle;
 
     @FXML
     private TableView<Book> tblCatalog;
@@ -58,11 +75,11 @@ public class Controller {
         tblCatalog.setItems(bookDate);
 
         tblCatalog.setEditable(true);
-        btnAdd.setDisable(true);
-      //  tbcId.setCellFactory(TextFieldTableCell.<Integer>forTableColumn());
+//        btnAdd.setDisable(true);
+//        tbcId.setCellFactory(TextFieldTableCell.forTableColumn());
         tbcTitle.setCellFactory(forTableColumn());
         tbcAuthor.setCellFactory(forTableColumn());
-//        tbcYear.setCellFactory(TextFieldTableCell.<Integer>forTableColumn());
+//        tbcYear.setCellFactory(TextFieldTableCell.forTableColumn());
 
     }
     @FXML
@@ -85,9 +102,57 @@ public class Controller {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON","*.json"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-        System.out.println(selectedFile.getName().toString());
+        importJSON(selectedFile.getName());
+       // System.out.println(selectedFile.getName().toString());
     }
 
+
+    public void importJSON(String filename){
+        int id=1;
+        JSONParser parser = new JSONParser();
+        try{
+            Object object=parser.parse(new FileReader(filename));
+            JSONArray books=(JSONArray)object;
+            Iterator bookIterator=books.iterator();
+            while (bookIterator.hasNext()){
+                JSONObject book=(JSONObject)bookIterator.next();
+                String title=book.get("title").toString();
+                String author=book.get("author").toString();
+                int year=Integer.parseInt(book.get("year").toString());
+                bookDate.add(new Book(id++,title,author,year));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void onClickSelect(){
+        filteredList=new FilteredList<Book>(bookDate, book -> {if(book.getYear()>1900)
+            return true;
+        else return false;
+        });
+        tblCatalog.setItems(filteredList);
+    }
+    @FXML
+    private void searchByParam(){
+        {
+        filteredList=new FilteredList<>(bookDate, book -> {if (
+                book.getTitle().contains(textFieldTitle.getText())
+                && book.getAuthor().contains(textFieldAuthor.getText())
+               && Integer.toString(book.getYear()).contains(textFieldYear.getText())
+                )
+        return true;
+        else
+        return false;
+        });
+        tblCatalog.setItems(filteredList);}
+    }
     @FXML
     public boolean isFilled(){
         return !textFieldN.getText().equals("")&&
@@ -124,11 +189,6 @@ public class Controller {
         bookSelected.setYear((Integer) editEvent.getNewValue());
     }
 
-    @FXML
-    private void searchByAuthor(Book book){
-       {
 
-        }
-    }
 
 }
